@@ -1,0 +1,6 @@
+.header {
+  margin: 2px;
+  border-bottom: 2px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+}
