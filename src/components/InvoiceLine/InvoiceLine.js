@@ -41,7 +41,7 @@ export default class InvoiceLine extends Component {
   };
   totalLine = () => {
     let { name, cost, units } = this.state;
-    let newTotal = parseFloat(cost) * parseFloat(units);
+    let newTotal = (parseFloat(cost) * parseFloat(units)).toFixed(2);
     this.props.addLine(name, cost, units, newTotal);
   };
   render() {

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import classes from "./InvoiceLineContainer.module.css";
 import { Button } from "react-bootstrap";
+import { FaEdit } from "react-icons/fa";
 
 export default class InvoiceLineContainer extends Component {
   constructor(props) {
@@ -36,20 +37,20 @@ export default class InvoiceLineContainer extends Component {
       return (
         <tr key={index}>
           <td>
-            {line.name}
-            <button>Edit</button>
+            <text>{line.name}</text>
+            <FaEdit />
           </td>
           <td>
-            {line.cost}
-            <button>Edit</button>
+            <text>{line.cost}</text>
+            <FaEdit />
           </td>
           <td>
-            {line.units}
-            <button>Edit</button>
+            <text>{line.units}</text>
+            <FaEdit />
           </td>
           <td>
-            {line.total}
-            <button>Edit</button>
+            <text>${line.total}</text>
+            <FaEdit />
           </td>
 
           <Button
@@ -63,7 +64,7 @@ export default class InvoiceLineContainer extends Component {
       );
     });
     return (
-      <div>
+      <div className={classes.container}>
         <InvoiceLine addLine={this.addInvoiceLine} />
         <table className={classes.itemLines}>
           <thead>

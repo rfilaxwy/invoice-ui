@@ -9,8 +9,18 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  text-align: center;
+  justify-content: center;
 }
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+.container {
+  margin: 20px 10px 10px 10px;
+}
+td {
+}
+td text {
+  margin-right: 15px;
 }

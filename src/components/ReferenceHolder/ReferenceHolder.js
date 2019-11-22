@@ -33,7 +33,6 @@ export default class TaskAdder extends Component {
 
   handleInput = (input, name) => {
     let value = input;
-    console.log(name);
     let refArr = this.state.referenceInputs;
     let index;
     for (let i = 0; i < refArr.length; i++) {
@@ -52,7 +51,7 @@ export default class TaskAdder extends Component {
     });
     return (
       <div className={classes.refBox}>
-        <Card border="light" style={{ width: "18rem" }}>
+        <Card border="light" className={classes.cardPrimary}>
           <Card.Header>Invoice Number: {this.props.invoiceNumber}</Card.Header>
           <Card.Body>{referenceInputs}</Card.Body>
         </Card>
