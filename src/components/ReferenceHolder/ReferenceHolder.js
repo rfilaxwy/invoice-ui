@@ -31,9 +31,24 @@ export default class TaskAdder extends Component {
     };
   }
 
+  handleInput = (input, name) => {
+    let value = input;
+    console.log(name);
+    let refArr = this.state.referenceInputs;
+    let index;
+    for (let i = 0; i < refArr.length; i++) {
+      if (refArr[i].name === name) {
+        refArr[i].input = value;
+        index = i;
+      }
+    }
+    console.log(refArr);
+    this.setState({ referenceInputs: refArr });
+  };
+
   render() {
     let referenceInputs = this.state.referenceInputs.map(ref => {
-      return <LineItem data={ref} />;
+      return <LineItem data={ref} update={this.handleInput} />;
     });
     return (
       <div className={classes.refBox}>

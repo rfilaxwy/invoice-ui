@@ -1,0 +1,10 @@
+.inputBox {
+  min-width: 150px !important;
+}
+.label {
+  align-self: center !important;
+  margin-left: 0;
+}
+.inputs {
+  width: 100px;
+}
