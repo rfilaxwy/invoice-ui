@@ -2,13 +2,17 @@ import React, { Component } from "react";
 
 import InvoiceLine from "../InvoiceLine/InvoiceLine";
 import classes from "./InvoiceLineContainer.module.css";
-import { Button } from "react-bootstrap";
 import { FaEdit } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+
+import TotalBox from "../TotalBox/TotalBox";
 
 export default class InvoiceLineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalShow: false,
+      setModalShow: false,
       invoiceLines: [
         { name: "laundry", cost: "20", units: "2", total: "40" },
         { name: "laundry", cost: "20", units: "2", total: "40" }
@@ -21,7 +25,7 @@ export default class InvoiceLineContainer extends Component {
     this.setState({
       invoiceLines: [...this.state.invoiceLines, newLine]
     });
-    console.log(this.state.invoiceLines);
+
     // this.setState(prevState => ({
     //   invoiceLInes: [...prevState.invoiceLines, newLine]
     // }));
@@ -52,14 +56,14 @@ export default class InvoiceLineContainer extends Component {
             <text>${line.total}</text>
             <FaEdit />
           </td>
-
-          <Button
-            onClick={() => {
-              this.deleteInvoiceLine(index);
-            }}
-          >
-            Delete
-          </Button>
+          <td className={classes.lastCol}>
+            <IoMdClose
+              className={classes.del}
+              onClick={() => {
+                this.deleteInvoiceLine(index);
+              }}
+            />
+          </td>
         </tr>
       );
     });
@@ -77,6 +81,7 @@ export default class InvoiceLineContainer extends Component {
           </thead>
           <tbody>{inputRows}</tbody>
         </table>
+        <TotalBox />
       </div>
     );
   }

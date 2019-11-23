@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import {
+  Button,
+  Dropdown,
+  DropdownButton,
+  FormControl,
+  InputGroup
+} from "react-bootstrap";
+import classes from "./InvoiceLine.module.css";
+
+var drop = {
+  width: "80px !important"
+};
 
 export default class InvoiceLine extends Component {
   constructor(props) {
@@ -8,7 +19,9 @@ export default class InvoiceLine extends Component {
       name: "",
       cost: "",
       units: "",
-      outPutLine: ""
+      unitName: "Dropdown",
+      outPutLine: "",
+      unitChoice: ["each", "lbs", "kg", "hr"]
     };
   }
   handleChange = (e, item) => {
@@ -44,7 +57,24 @@ export default class InvoiceLine extends Component {
     let newTotal = (parseFloat(cost) * parseFloat(units)).toFixed(2);
     this.props.addLine(name, cost, units, newTotal);
   };
+  unitSelect = unit => {
+    this.setState({ unitName: unit });
+  };
   render() {
+    let dropUnits = this.state.unitChoice.map(unit => {
+      return (
+        <Dropdown.Item
+          style={drop}
+          key={unit}
+          onSelect={() => {
+            this.unitSelect(unit);
+          }}
+          href="#"
+        >
+          {unit}
+        </Dropdown.Item>
+      );
+    });
     return (
       <div>
         <InputGroup className="mb-3">
@@ -69,6 +99,14 @@ export default class InvoiceLine extends Component {
               this.handleChange(e, "units");
             }}
           />
+          <DropdownButton
+            as={InputGroup.Append}
+            variant="outline-secondary"
+            title={this.state.unitName}
+            id="input-group-dropdown-2"
+          >
+            {dropUnits}
+          </DropdownButton>
           <InputGroup.Append>
             <Button
               onClick={() => {
@@ -76,7 +114,17 @@ export default class InvoiceLine extends Component {
               }}
               variant="outline-secondary"
             >
-              Button
+              Add Description
+            </Button>
+          </InputGroup.Append>
+          <InputGroup.Append>
+            <Button
+              onClick={() => {
+                this.totalLine();
+              }}
+              variant="outline-secondary"
+            >
+              Add Line
             </Button>
           </InputGroup.Append>
         </InputGroup>

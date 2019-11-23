@@ -24,3 +24,22 @@ td {
 td text {
   margin-right: 15px;
 }
+
+.del {
+  color: rgba(255, 0, 0, 0.5);
+  justify-self: center;
+}
+
+.del:hover {
+  color: red;
+}
+tr > .del {
+  margin-top: 20%;
+}
+.lastCol {
+  background-color: white;
+  border: none;
+}
+.dropdown {
+  width: 100px;
+}

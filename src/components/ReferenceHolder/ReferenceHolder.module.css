@@ -11,9 +11,3 @@
   display: flex;
   justify-content: space-between;
 }
-.LineItem_label__d2ops {
-  margin-right: 15px !important;
-}
-.input {
-  border: 0 0 1px 0 solid gray;
-}
