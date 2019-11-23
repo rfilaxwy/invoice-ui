@@ -1,4 +1,3 @@
-.drop {
-  min-width: 100px !important;
-  max-width: 100px !important;
+.area {
+  width: 100%;
 }

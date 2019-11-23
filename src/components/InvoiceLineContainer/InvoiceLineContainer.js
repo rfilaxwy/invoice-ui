@@ -11,24 +11,18 @@ export default class InvoiceLineContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false,
-      setModalShow: false,
       invoiceLines: [
-        { name: "laundry", cost: "20", units: "2", total: "40" },
+        { name: "laundry", cost: "20", units: "2", description: 'yadayada' total: "40" },
         { name: "laundry", cost: "20", units: "2", total: "40" }
       ]
     };
   }
 
-  addInvoiceLine = (name, cost, units, total) => {
-    let newLine = { name, cost, units, total };
+  addInvoiceLine = (name, cost, units, description, total) => {
+    let newLine = { name, cost, units, description, total };
     this.setState({
       invoiceLines: [...this.state.invoiceLines, newLine]
     });
-
-    // this.setState(prevState => ({
-    //   invoiceLInes: [...prevState.invoiceLines, newLine]
-    // }));
   };
   deleteInvoiceLine = index => {
     let oldInvoiceLines = this.state.invoiceLines;
@@ -42,21 +36,21 @@ export default class InvoiceLineContainer extends Component {
         <tr key={index}>
           <td>
             <text>{line.name}</text>
-            <FaEdit />
           </td>
           <td>
             <text>{line.cost}</text>
-            <FaEdit />
           </td>
           <td>
             <text>{line.units}</text>
-            <FaEdit />
+          </td>
+          <td>
+            <text>{line.description}</text>
           </td>
           <td>
             <text>${line.total}</text>
-            <FaEdit />
           </td>
           <td className={classes.lastCol}>
+            <FaEdit />
             <IoMdClose
               className={classes.del}
               onClick={() => {
@@ -76,6 +70,7 @@ export default class InvoiceLineContainer extends Component {
               <th>Company</th>
               <th>Cost</th>
               <th>Unit</th>
+              <th>Description</th>
               <th>Total</th>
             </tr>
           </thead>
