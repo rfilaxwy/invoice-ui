@@ -62,6 +62,13 @@ export default class InvoiceLine extends Component {
   totalLine = () => {
     let { name, cost, units, unitName, description } = this.state;
     let newTotal = (parseFloat(cost) * parseFloat(units)).toFixed(2);
+    this.setState({
+      name: "",
+      cost: "",
+      units: "",
+      unitName: "Unit Type",
+      description: ""
+    });
     this.props.addLine(name, cost, units, unitName, description, newTotal);
   };
 
@@ -103,23 +110,27 @@ export default class InvoiceLine extends Component {
           </InputGroup.Prepend>
           <FormControl
             placeholder="Service"
+            value={this.state.name}
             onChange={e => {
               this.handleChange(e, "name");
             }}
           />
           <FormControl
             placeholder="Cost per"
+            value={this.state.cost}
             onChange={e => {
               this.handleChange(e, "cost");
             }}
           />
           <FormControl
             placeholder="Quantity"
+            value={this.state.units}
             onChange={e => {
               this.handleChange(e, "units");
             }}
           />
           <DropdownButton
+            value={this.state.unitName}
             as={InputGroup.Append}
             variant="outline-primary"
             title={this.state.unitName}
