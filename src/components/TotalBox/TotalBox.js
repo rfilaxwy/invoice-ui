@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
 
+import classes from "./TotalBox.module.css";
+
 const TotalBox = props => {
   const [tax, setTax] = useState(0);
-  console.log(props);
   return (
-    <Card border="secondary" style={{ width: "18rem" }}>
+    <Card border="secondary" className={classes.tBox}>
       <Card.Header>Invoice Total</Card.Header>
       <Card.Body>
         <table>
@@ -26,6 +27,7 @@ const TotalBox = props => {
                   <option>5</option>
                   <option>7</option>
                   <option>9</option>
+                  <option>12</option>
                 </select>
                 %
               </td>
@@ -33,6 +35,7 @@ const TotalBox = props => {
             <tr>
               <td>Total</td>
               <td>
+                $
                 {(
                   parseFloat(props.subTotal) +
                   parseFloat(props.subTotal) * (parseFloat(tax) / 100)

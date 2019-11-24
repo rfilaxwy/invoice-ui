@@ -14,16 +14,20 @@ export default class InvoiceLineContainer extends Component {
   }
 
   addInvoiceLine = (name, cost, units, unitName, description, total) => {
-    let newLine = {
-      name,
-      cost,
-      units: `${units} ${unitName}`,
-      description,
-      total
-    };
-    this.setState({
-      invoiceLines: [...this.state.invoiceLines, newLine]
-    });
+    if (isNaN(parseFloat(cost)) || isNaN(parseFloat(units))) {
+      alert("Need a number of units and cost");
+    } else {
+      let newLine = {
+        name,
+        cost,
+        units: `${units} ${unitName}`,
+        description,
+        total
+      };
+      this.setState({
+        invoiceLines: [...this.state.invoiceLines, newLine]
+      });
+    }
   };
 
   deleteInvoiceLine = index => {
@@ -31,13 +35,18 @@ export default class InvoiceLineContainer extends Component {
     oldInvoiceLines.splice(index, 1);
     this.setState({ invoiceLines: oldInvoiceLines });
   };
+  copyLine = index => {
+    let invLine = this.state.invoiceLines[index];
+    this.setState({
+      invoiceLines: [...this.state.invoiceLines, invLine]
+    });
+  };
 
   render() {
     let invLines = this.state.invoiceLines;
     let subTotal = 0;
     if (invLines.length > 0) {
       invLines.forEach(line => {
-        console.log(line.total);
         subTotal += parseFloat(line.total);
       });
     }
@@ -63,7 +72,11 @@ export default class InvoiceLineContainer extends Component {
             </td>
             <td className={classes.lastCol}>
               <FaEdit
+                title="copy line"
                 className={classes.del}
+                onClick={() => {
+                  this.copyLine(index);
+                }}
                 //on click bring up a modal with editable
               />
               <IoMdClose

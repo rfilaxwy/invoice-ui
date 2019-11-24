@@ -34,25 +34,22 @@ export default class TaskAdder extends Component {
   handleInput = (input, name) => {
     let value = input;
     let refArr = this.state.referenceInputs;
-    let index;
     for (let i = 0; i < refArr.length; i++) {
       if (refArr[i].name === name) {
         refArr[i].input = value;
-        index = i;
       }
     }
-    console.log(refArr);
     this.setState({ referenceInputs: refArr });
   };
 
   render() {
-    let referenceInputs = this.state.referenceInputs.map(ref => {
-      return <LineItem data={ref} update={this.handleInput} />;
+    let referenceInputs = this.state.referenceInputs.map((ref, i) => {
+      return <LineItem key={i} data={ref} update={this.handleInput} />;
     });
     return (
       <div className={classes.refBox}>
         <Card border="light" className={classes.cardPrimary}>
-          <Card.Header>Invoice Number: {this.props.invoiceNumber}</Card.Header>
+          <Card.Header>Invoice Number: {this.state.invoiceNumber}</Card.Header>
           <Card.Body>{referenceInputs}</Card.Body>
         </Card>
       </div>

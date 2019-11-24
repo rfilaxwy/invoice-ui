@@ -7,7 +7,7 @@ export default class CompanyHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyName: "Big Company ltd.",
+      companyName: "Major League Company Ltd.",
       address: "13954 Gargantuan Blvd",
       city: "Scranton",
       province: "MB",
@@ -20,16 +20,26 @@ export default class CompanyHeader extends Component {
 
   render() {
     let co = this.state;
-    let address = `${co.address}
-    ${co.city}, ${co.province}
-    ${co.postalCode}`;
+    let address = (
+      <div className={classes.address}>
+        <p>{co.address}</p>
+        <p>
+          {co.city}, {co.province}
+        </p>
+        <p>{co.postalCode}</p>
+        <p>Contact: {co.email}</p>
+      </div>
+    );
+
     return (
       <div>
         <Card border="light" style={{ width: "18rem" }}>
-          <Card.Header>{co.companyName}</Card.Header>
+          <Card.Header className={classes.companyName}>
+            {co.companyName}
+          </Card.Header>
           <Card.Body>
             <Card.Title>Invoice</Card.Title>
-            <Card.Text>{address}</Card.Text>
+            {address}
           </Card.Body>
         </Card>
       </div>

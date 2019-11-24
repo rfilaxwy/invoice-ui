@@ -1,0 +1,24 @@
+.tBox {
+  float: right !important;
+  margin: 10px;
+  width: 22rem;
+  background-color: white;
+}
+select {
+  display: inline;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: #444;
+  line-height: 1;
+  padding: 0.3em 1em 0.3em 0.8em;
+  width: 40%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid #aaa;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 0.5em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+}

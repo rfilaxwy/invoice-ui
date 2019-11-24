@@ -19,11 +19,12 @@ export default class InvoiceLine extends Component {
     super(props);
     this.state = {
       setShow: false,
+      lineItem: 0,
       name: "",
       cost: "",
       units: "",
       description: "",
-      unitName: "Dropdown",
+      unitName: "Unit Type",
       outPutLine: "",
       unitChoice: ["each", "lbs", "kg", "hr"]
     };
@@ -101,26 +102,26 @@ export default class InvoiceLine extends Component {
             <InputGroup.Text>Line item</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
-            placeholder="name"
+            placeholder="Service"
             onChange={e => {
               this.handleChange(e, "name");
             }}
           />
           <FormControl
-            placeholder="Cost/unit"
+            placeholder="Cost per"
             onChange={e => {
               this.handleChange(e, "cost");
             }}
           />
           <FormControl
-            placeholder="units"
+            placeholder="Quantity"
             onChange={e => {
               this.handleChange(e, "units");
             }}
           />
           <DropdownButton
             as={InputGroup.Append}
-            variant="outline-secondary"
+            variant="outline-primary"
             title={this.state.unitName}
             id="input-group-dropdown-2"
           >
