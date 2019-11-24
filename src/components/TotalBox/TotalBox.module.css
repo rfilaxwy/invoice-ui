@@ -1,8 +1,14 @@
 .tBox {
-  float: right !important;
+  float: right;
   margin: 10px;
   width: 22rem;
   background-color: white;
+}
+@media only screen and (max-width: 600px) {
+  .tBox {
+    margin: auto;
+    float: none;
+  }
 }
 select {
   display: inline;
@@ -11,7 +17,6 @@ select {
   color: #444;
   line-height: 1;
   padding: 0.3em 1em 0.3em 0.8em;
-  width: 40%;
   box-sizing: border-box;
   margin: 0;
   border: 1px solid #aaa;

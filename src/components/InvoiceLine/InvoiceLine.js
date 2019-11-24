@@ -104,7 +104,7 @@ export default class InvoiceLine extends Component {
     });
     return (
       <div>
-        <InputGroup className="mb-3">
+        <InputGroup className={classes.mb3}>
           <InputGroup.Prepend>
             <InputGroup.Text>Line item</InputGroup.Text>
           </InputGroup.Prepend>
