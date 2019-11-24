@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   Button,
-  ButtonToolbar,
   Dropdown,
   DropdownButton,
   FormControl,
@@ -60,9 +59,9 @@ export default class InvoiceLine extends Component {
   };
 
   totalLine = () => {
-    let { name, cost, units } = this.state;
+    let { name, cost, units, unitName, description } = this.state;
     let newTotal = (parseFloat(cost) * parseFloat(units)).toFixed(2);
-    this.props.addLine(name, cost, units, newTotal);
+    this.props.addLine(name, cost, units, unitName, description, newTotal);
   };
 
   unitSelect = unit => {
@@ -164,7 +163,10 @@ export default class InvoiceLine extends Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Close and clear
             </Button>
-            <Button variant="primary" onClick={this.handleClose}>
+            <Button
+              variant="primary"
+              onClick={() => this.setState({ setShow: false })}
+            >
               Save and close
             </Button>
           </Modal.Footer>

@@ -10,20 +10,22 @@ import TotalBox from "../TotalBox/TotalBox";
 export default class InvoiceLineContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      invoiceLines: [
-        { name: "laundry", cost: "20", units: "2", description: 'yadayada' total: "40" },
-        { name: "laundry", cost: "20", units: "2", total: "40" }
-      ]
-    };
+    this.state = { invoiceLines: [] };
   }
 
-  addInvoiceLine = (name, cost, units, description, total) => {
-    let newLine = { name, cost, units, description, total };
+  addInvoiceLine = (name, cost, units, unitName, description, total) => {
+    let newLine = {
+      name,
+      cost,
+      units: `${units} ${unitName}`,
+      description,
+      total
+    };
     this.setState({
       invoiceLines: [...this.state.invoiceLines, newLine]
     });
   };
+
   deleteInvoiceLine = index => {
     let oldInvoiceLines = this.state.invoiceLines;
     oldInvoiceLines.splice(index, 1);
@@ -31,36 +33,50 @@ export default class InvoiceLineContainer extends Component {
   };
 
   render() {
-    let inputRows = this.state.invoiceLines.map((line, index) => {
-      return (
-        <tr key={index}>
-          <td>
-            <text>{line.name}</text>
-          </td>
-          <td>
-            <text>{line.cost}</text>
-          </td>
-          <td>
-            <text>{line.units}</text>
-          </td>
-          <td>
-            <text>{line.description}</text>
-          </td>
-          <td>
-            <text>${line.total}</text>
-          </td>
-          <td className={classes.lastCol}>
-            <FaEdit />
-            <IoMdClose
-              className={classes.del}
-              onClick={() => {
-                this.deleteInvoiceLine(index);
-              }}
-            />
-          </td>
-        </tr>
-      );
-    });
+    let invLines = this.state.invoiceLines;
+    let subTotal = 0;
+    if (invLines.length > 0) {
+      invLines.forEach(line => {
+        console.log(line.total);
+        subTotal += parseFloat(line.total);
+      });
+    }
+    let inputRows;
+    if (this.state.invoiceLines.length > 0) {
+      inputRows = this.state.invoiceLines.map((line, index) => {
+        return (
+          <tr key={index}>
+            <td>
+              <text>{line.name}</text>
+            </td>
+            <td>
+              <text>{line.cost}</text>
+            </td>
+            <td>
+              <text>{line.units}</text>
+            </td>
+            <td>
+              <text>{line.description}</text>
+            </td>
+            <td>
+              <text>${line.total}</text>
+            </td>
+            <td className={classes.lastCol}>
+              <FaEdit
+                className={classes.del}
+                //on click bring up a modal with editable
+              />
+              <IoMdClose
+                className={classes.del}
+                onClick={() => {
+                  this.deleteInvoiceLine(index);
+                }}
+              />
+            </td>
+          </tr>
+        );
+      });
+    }
     return (
       <div className={classes.container}>
         <InvoiceLine addLine={this.addInvoiceLine} />
@@ -74,9 +90,9 @@ export default class InvoiceLineContainer extends Component {
               <th>Total</th>
             </tr>
           </thead>
-          <tbody>{inputRows}</tbody>
+          <tbody>{inputRows || null}</tbody>
         </table>
-        <TotalBox />
+        <TotalBox subTotal={subTotal} />
       </div>
     );
   }
